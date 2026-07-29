@@ -13,14 +13,34 @@
 
 ---
 
+## 📌 Table of Contents
+- [Project Overview](#-project-overview)
+- [Key Features](#-key-features)
+- [AI Features](#-ai-features)
+- [System Architecture](#-system-architecture)
+- [Tech Stack](#-tech-stack)
+- [Folder Structure](#-folder-structure)
+- [Installation Guide](#-installation-guide)
+- [Environment Variables](#-environment-variables)
+- [Database Setup & Migrations](#-database-setup--migrations)
+- [API Documentation](#-api-documentation)
+- [Attendance Workflow](#-attendance-workflow)
+- [User Roles & Permissions](#-user-roles--permissions)
+- [Screenshots](#-screenshots)
+- [Known Limitations](#-known-limitations)
+- [Future Scope](#-future-scope)
+- [License & Contact](#-license--contact)
+
+---
+
 ## 📌 Project Overview
 
 Educational institutions face significant operational fragmentation across administrative, academic, and communication channels:
 
-* **Administrative Workload**: Manual attendance tracking, paper records, and repetitive operational overhead consume valuable teaching hours.
-* **Communication Gaps**: Disconnected feedback loops between teachers, students, and parents lead to delayed interventions.
+* **Administrative Overhead**: Manual attendance tracking, paper records, and repetitive operational tasks consume valuable teaching hours.
+* **Communication Gaps**: Disconnected feedback loops between teachers, students, and parents lead to delayed academic interventions.
 * **Attendance Inefficiencies**: Traditional roll-calls are prone to errors, proxy attendance, and lack real-time parent notifications.
-* **Student Performance & Engagement**: Fragmented assessment data makes early academic risk detection difficult and reduces student engagement.
+* **Student Performance & Engagement**: Fragmented assessment data makes early academic risk detection difficult and reduces student motivation.
 
 ### 💡 How TriConnect Solves This
 
@@ -30,16 +50,15 @@ Educational institutions face significant operational fragmentation across admin
 
 ## ⭐ Key Features
 
-| Category | Feature | Description |
+| Feature Module | Key Functionality | Description |
 | :--- | :--- | :--- |
-| 🧑‍🎓 **Student Hub** | **Personalized Dashboard** | Real-time overview of attendance, assignments, timetable, XP scores, and notifications. |
-| 🎮 **Gamified Learning** | **AI Learning Quest** | Earn XP points, unlock badges, level up, and view class leaderboards through course completion. |
-| 📸 **Smart Attendance** | **Biometric & Camera Scan** | First-login face enrollment, live webcam capture, and side-by-side verification workflow. |
-| 📍 **Geofence Security** | **GPS Proximity Guard** | Validates physical campus boundaries before enabling attendance verification. |
-| 👩‍🏫 **Teacher Hub** | **Classroom Management** | Track student attendance records, publish assignments, issue notes, and view burnout analytics. |
-| 👨‍👩‍👧 **Parent Portal** | **Real-Time Monitoring** | Direct check-in alerts, academic progress reports, and direct teacher communication. |
-| 🛠️ **Admin Hub** | **Campus Operations** | Manage school settings, student onboarding, system audits, and global security policies. |
-| 📊 **Analytics** | **Performance & Risk Engine** | AI-driven insights to detect student performance drops and attendance anomalies early. |
+| 🧑‍🎓 **Student Hub** | Personalized Dashboard | Real-time overview of attendance, assignments, timetable, XP scores, and notifications. |
+| 🎮 **Gamified Learning** | AI Learning Quest | Earn XP points, unlock badges, level up, and view class leaderboards through course completion. |
+| 📸 **Smart Attendance** | Biometric & Camera Verification | First-login face enrollment, live webcam capture, and side-by-side verification workflow. |
+| 👩‍🏫 **Teacher Hub** | Classroom Management | Track student attendance records, publish assignments, issue notes, and view burnout analytics. |
+| 👨‍👩‍👧 **Parent Portal** | Real-Time Monitoring | Direct check-in alerts, academic progress reports, and direct teacher communication. |
+| 🛠️ **Admin Hub** | Campus Operations | Manage school settings, student onboarding, system audits, and global security policies. |
+| 📊 **Analytics** | Performance Insights | AI-driven analytics to detect student performance drops and attendance anomalies early. |
 
 ---
 
@@ -90,35 +109,36 @@ Educational institutions face significant operational fragmentation across admin
 
 ## 🛠️ Tech Stack
 
-| Component | Technologies Used |
+| Layer | Technologies |
 | :--- | :--- |
 | **Frontend Framework** | Next.js 16 (App Router), React 19, TypeScript |
 | **Styling & UI** | Vanilla CSS, Tailwind CSS v4, Framer Motion, Lucide React Icons |
 | **Backend Framework** | Python 3.11+, FastAPI, Uvicorn, Pydantic v2 |
 | **Database & ORM** | SQLite / PostgreSQL, SQLAlchemy v2.0, Alembic |
 | **Security & Auth** | JWT (JSON Web Tokens), Bcrypt, Role-Based Access Control (RBAC) |
-| **Data Processing** | NumPy, Custom Cosine Similarity Vector Engines |
+| **Biometric Processing** | NumPy, Custom Cosine Similarity Vector Engine (`face_engine.py`) |
 
 ---
 
-## 📂 Project Structure
+## 📂 Folder Structure
 
 ```text
 triconnect/
 ├── backend/                  # FastAPI Python Backend
 │   ├── app/
 │   │   ├── api/              # API Route Handlers (V1)
-│   │   │   ├── v1/
-│   │   │   │   ├── attendance/   # Smart Attendance Endpoints
-│   │   │   │   ├── auth/         # Login & JWT Endpoints
-│   │   │   │   ├── school/       # School Management Endpoints
-│   │   │   │   └── user/         # User Profile Endpoints
+│   │   │   └── v1/
+│   │   │       ├── attendance/   # Smart Attendance Endpoints
+│   │   │       ├── auth/         # Login & JWT Endpoints
+│   │   │       ├── school/       # School Management Endpoints
+│   │   │       └── user/         # User Profile Endpoints
 │   │   ├── core/             # Security, JWT, Logging, Config
 │   │   ├── database/         # DB Connection & Session Management
 │   │   ├── models/           # SQLAlchemy Data Models
 │   │   ├── schemas/          # Pydantic Request/Response Models
-│   │   ├── services/         # Business Logic & Telemetry Services
+│   │   ├── services/         # Business Logic, Telemetry & Biometrics
 │   │   └── main.py           # FastAPI Application Entrypoint
+│   ├── .env.example          # Backend Environment Template
 │   └── requirements.txt      # Python Dependencies
 │
 ├── src/                      # Next.js Frontend Application
@@ -134,21 +154,25 @@ triconnect/
 │   ├── context/              # React Auth Context & Global State
 │   └── lib/                  # Utilities & API Client Helpers
 │
-├── package.json              # Frontend Node Dependencies
-├── README.md                 # Project Documentation
-└── tsconfig.json             # TypeScript Configuration
+├── docs/                     # Documentation & Screenshots
+│   └── screenshots/          # Image Placeholders for README
+├── .env.example              # Project-wide Environment Template
+├── .gitignore                # Git Exclusions
+├── LICENSE                   # MIT License
+├── package.json              # Frontend Dependencies
+└── README.md                 # Documentation
 ```
 
 ---
 
-## ⚡ Installation & Setup
+## ⚡ Installation Guide
 
-Follow these steps to run TriConnect locally:
+Follow these step-by-step instructions to clone and run TriConnect on your local environment:
 
 ### 1. Prerequisites
-* **Node.js** (v18.0 or higher)
-* **Python** (v3.10 or higher)
-* **Git**
+- **Node.js** (v18.0 or higher)
+- **Python** (v3.10 or higher)
+- **Git**
 
 ### 2. Clone Repository
 ```bash
@@ -156,7 +180,7 @@ git clone https://github.com/your-username/triconnect.git
 cd triconnect
 ```
 
-### 3. Frontend Setup
+### 3. Setup Frontend
 ```bash
 # Install Node dependencies
 npm install
@@ -164,46 +188,86 @@ npm install
 # Start Next.js development server
 npm run dev
 ```
-The frontend will be available at `http://localhost:3000`.
+The frontend will start at `http://localhost:3000`.
 
-### 4. Backend Setup
+### 4. Setup Backend
 Open a new terminal window:
 ```bash
 # Navigate to backend directory
 cd backend
 
-# Create virtual environment (optional but recommended)
+# Create virtual environment
 python -m venv venv
+
+# Activate virtual environment
 # On Windows:
 venv\Scripts\activate
 # On macOS/Linux:
 source venv/bin/activate
 
-# Install Python dependencies
+# Install dependencies
 pip install -r requirements.txt
 
-# Run FastAPI development server
+# Start FastAPI development server
 python -m uvicorn app.main:app --reload --port 8000
 ```
-The backend API documentation will be available at `http://localhost:8000/docs`.
+The backend API service will run at `http://localhost:8000`, and interactive Swagger API documentation will be available at `http://localhost:8000/docs`.
 
 ---
 
-## 🔐 Environment Variables
+## 🔑 Environment Variables
 
-Create a `.env` file in the root directory (and `/backend/.env`):
+Copy `.env.example` to create your local `.env` files:
 
-```env
-# Frontend Config (.env.local)
+```bash
+# Root / Frontend Config (.env.local)
 NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
 
 # Backend Config (backend/.env)
-SECRET_KEY=your_super_secret_jwt_key_here
+DATABASE_URL=sqlite:///./triconnect.db
+JWT_SECRET=your_super_secret_jwt_key_here
+SECRET_KEY=your_super_secret_app_key
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=1440
-DATABASE_URL=sqlite:///./triconnect.db
+OPENAI_API_KEY=your_openai_api_key_here
 ALLOWED_ORIGINS=http://localhost:3000
 ```
+
+---
+
+## 🗄️ Database Setup & Migrations
+
+TriConnect uses **SQLAlchemy ORM** with **SQLite** by default for lightweight local development, with support for **PostgreSQL** in production.
+
+### Auto Database Initialization
+Upon launching the backend server (`python -m uvicorn app.main:app --reload`), SQLite tables and seed data are automatically initialized if no database exists.
+
+### PostgreSQL Migration (Optional)
+To switch to PostgreSQL, update `DATABASE_URL` in `backend/.env`:
+```env
+DATABASE_URL=postgresql://user:password@localhost:5432/triconnect_db
+```
+Then run Alembic migrations:
+```bash
+cd backend
+alembic upgrade head
+```
+
+---
+
+## 📡 API Documentation Summary
+
+The FastAPI backend exposes structured RESTful endpoints documented interactively at `http://localhost:8000/docs`:
+
+| Module | Method | Endpoint | Description |
+| :--- | :--- | :--- | :--- |
+| **Auth** | `POST` | `/api/v1/auth/login` | Authenticate user and issue JWT access token. |
+| **Auth** | `GET` | `/api/v1/auth/me` | Fetch currently authenticated user profile. |
+| **Attendance** | `GET` | `/api/v1/attendance/enrollment-status` | Check if student face enrollment is completed. |
+| **Attendance** | `POST` | `/api/v1/attendance/enroll-face` | Store student face enrollment image & feature vector. |
+| **Attendance** | `POST` | `/api/v1/attendance/verify` | Process live attendance photo verification and record check-in. |
+| **Attendance** | `GET` | `/api/v1/attendance/settings` | Retrieve active attendance session settings & hours. |
+| **Admin** | `POST` | `/api/v1/admin/register-student` | Register new student record and generate login credentials. |
 
 ---
 
@@ -242,12 +306,12 @@ Attendance Saved in Database (Date, Time, Status: Present)
 
 ## 👥 User Roles & Permissions
 
-| Role | Access Permissions |
+| Role | Permissions & Access Level |
 | :--- | :--- |
-| 🧑‍🎓 **Student** | Mark attendance, view personal attendance logs, complete AI learning quests, view assignments & timetable. |
-| 👩‍🏫 **Teacher** | Track class attendance, assign homework, publish notices, monitor student burnout risk scores. |
-| 👨‍👩‍👧 **Parent** | Receive student check-in alerts, view academic progress reports, communicate with teachers. |
-| 🛠️ **Admin** | Register students/teachers, configure school parameters, audit security logs, manage campus data. |
+| 🧑‍🎓 **Student** | Perform first-login face enrollment, mark daily attendance via live webcam, complete AI learning quests, view timetable and grade reports. |
+| 👩‍🏫 **Teacher** | Access class rosters, inspect daily attendance logs, assign homework, publish notices, and view student burnout risk indicators. |
+| 👨‍👩‍👧 **Parent** | Receive real-time student check-in alerts, review academic progress analytics, and communicate with teachers. |
+| 🛠️ **Admin** | Onboard students & teachers, configure campus settings, audit verification logs, and manage system security policies. |
 
 ---
 
@@ -255,56 +319,47 @@ Attendance Saved in Database (Date, Time, Status: Present)
 
 *(Add screenshot previews of your application screens below)*
 
-| View | Screenshot Preview |
+| Screen View | Reference Path |
 | :--- | :--- |
-| **Landing Page** | `![Landing Page](docs/screenshots/landing.png)` |
-| **Student Dashboard** | `![Student Dashboard](docs/screenshots/student_dashboard.png)` |
-| **Face Enrollment** | `![Face Enrollment](docs/screenshots/enrollment.png)` |
-| **Side-by-Side Attendance** | `![Attendance Verification](docs/screenshots/attendance.png)` |
-| **Teacher Dashboard** | `![Teacher Dashboard](docs/screenshots/teacher_dashboard.png)` |
-| **Admin Panel** | `![Admin Panel](docs/screenshots/admin.png)` |
+| **Landing Page** | `docs/screenshots/landing-page.png` |
+| **Student Dashboard** | `docs/screenshots/student-dashboard.png` |
+| **Teacher Dashboard** | `docs/screenshots/teacher-dashboard.png` |
+| **Parent Dashboard** | `docs/screenshots/parent-dashboard.png` |
+| **Admin Operations** | `docs/screenshots/admin-dashboard.png` |
+| **Smart Attendance** | `docs/screenshots/attendance.png` |
+| **Learning Quest** | `docs/screenshots/learning-quest.png` |
+| **Analytics Overview** | `docs/screenshots/analytics.png` |
 
 ---
 
-## 🚀 Future Enhancements
+## ⚠️ Known Limitations
 
-* 🤖 **Production-Grade Neural Face Recognition**: Integration with InsightFace / PyTorch models for automated facial verification.
-* 💬 **AI Assistant Chatbot**: Natural language query resolution for students and parents.
-* 📱 **Native Mobile Application**: Cross-platform React Native app with push notifications.
-* 🚌 **Smart School Bus Transport Tracking**: Real-time GPS tracking of school buses for parents.
-* 🪪 **Digital Smart NFC/QR Badges**: NFC-enabled tap-to-enter campus security gates.
-* 🎙️ **Voice Assistant Integration**: Voice-command actions for teachers taking rapid classroom notes.
+In accordance with transparent open-source practices, the current Hackathon MVP implementation includes the following known scope boundaries:
 
----
-
-## 🛡️ Security & Privacy
-
-* 🔑 **JWT Authentication**: Secure stateless token authentication for all private API routes.
-* 🛡️ **Role-Based Access Control (RBAC)**: Strict permission boundaries ensuring users only access authorized data.
-* 🔒 **Encrypted Password Hashing**: Passwords stored using industry-standard bcrypt/Argon2 hashing algorithms.
-* 📋 **Audit Trails**: Real-time logging of all attendance checks and administrative actions.
+1. **Local Database Scope**: The default setup uses SQLite (`triconnect.db`) for zero-configuration local deployment.
+2. **Camera Hardware Permission**: Web-based camera verification requires browser permissions (`navigator.mediaDevices.getUserMedia`).
+3. **Web Biometric Pipeline**: Face verification uses client-assisted L2 vector embedding matching optimized for demo reliability and low-latency response.
 
 ---
 
-## 👥 Team & Contributors
+## 🚀 Future Scope
 
-* **Team Lead / Full-Stack Developer** – *Project Architecture & Full-Stack Implementation*
-* **AI & Backend Developer** – *FastAPI Endpoints, Database Schemas & Telemetry Engine*
-* **UI/UX Designer** – *Responsive Components, Motion Animations & System Theme*
-
----
-
-## 📜 License
-
-Distributed under the **MIT License**. See `LICENSE` for details.
+- 🤖 **Production-Grade Deep Learning Models**: Integration with InsightFace / PyTorch models for heavy server-side neural inference.
+- 💬 **AI Assistant Chatbot**: Natural language query resolution for students and parents.
+- 📱 **Native Mobile Application**: Cross-platform React Native app with push notifications.
+- 🚌 **Smart Bus Tracking**: Real-time GPS tracking of school buses for parents.
+- 🪪 **Digital Smart NFC/QR Badges**: NFC-enabled tap-to-enter campus security gates.
 
 ---
 
-## ✉️ Contact & Support
+## 📜 License & Contributors
 
-* **Project Repository**: [GitHub Repository](https://github.com/your-username/triconnect)
-* **Email**: ndheerajshetty456@gmail.com
+Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for details.
 
+### Contributors & Team
+- **Full-Stack Architecture & Lead** – *Project Lead*
+- **Backend & AI Telemetry Service** – *Core Backend Developer*
+- **Frontend & UI/UX Design** – *Frontend Developer*
 
 ---
 
