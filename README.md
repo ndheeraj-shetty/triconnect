@@ -303,8 +303,8 @@ Distributed under the **MIT License**. See `LICENSE` for details.
 ## ✉️ Contact & Support
 
 * **Project Repository**: [GitHub Repository](https://github.com/your-username/triconnect)
-* **Email**: support@triconnect.edu
-* **LinkedIn**: [TriConnect Project](https://linkedin.com/company/triconnect)
+* **Email**: ndheerajshetty456@gmail.com
+
 
 ---
 
