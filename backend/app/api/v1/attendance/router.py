@@ -118,8 +118,9 @@ def check_face_enrollment_status(
         return {"face_enrolled": True, "face_image": None, "role": current_user.role.name}
     
     student = current_user.student_profile
+    is_enrolled = bool(getattr(student, 'face_enrolled', False)) or bool(getattr(student, 'face_image', None))
     return {
-        "face_enrolled": getattr(student, 'face_enrolled', False) or False,
+        "face_enrolled": is_enrolled,
         "face_image": getattr(student, 'face_image', None),
         "enrolled_at": getattr(student, 'enrolled_at', None),
         "student_id": str(student.id),

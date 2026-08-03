@@ -110,6 +110,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
       // Check if student has completed first-time Face Enrollment
       if (!pathname.includes('/dashboard/student/enroll-face')) {
+        let localEnrolled = false;
+        try {
+          localEnrolled = localStorage.getItem('face_enrolled') === 'true' || !!localStorage.getItem('enrolled_face_image');
+        } catch (e) {}
+
+        if (localEnrolled) return;
+
         const checkEnrollment = async () => {
           try {
             const token = localStorage.getItem('triconnect_token');
@@ -119,8 +126,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             });
             if (res.ok) {
               const data = await res.json();
-              if (data.face_enrolled === false) {
+              let hasLocalImg = false;
+              try { hasLocalImg = !!localStorage.getItem('enrolled_face_image'); } catch (e) {}
+
+              if (data.face_enrolled === false && !hasLocalImg) {
                 router.replace('/dashboard/student/enroll-face');
+              } else {
+                try { localStorage.setItem('face_enrolled', 'true'); } catch (e) {}
               }
             }
           } catch (e) {

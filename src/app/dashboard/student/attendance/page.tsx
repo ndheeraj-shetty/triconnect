@@ -84,6 +84,11 @@ export default function StudentAttendancePage() {
       if (!activeToken) return;
 
       // 1. Fetch enrolled face image
+      const localImage = localStorage.getItem('enrolled_face_image');
+      if (localImage) {
+        setEnrolledFaceImage(localImage);
+      }
+
       const statusRes = await fetch('http://localhost:8000/api/v1/attendance/enrollment-status', {
         headers: { 'Authorization': `Bearer ${activeToken}` }
       });
